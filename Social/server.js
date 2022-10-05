@@ -1,6 +1,7 @@
  import express  from "express";
  import cors from 'cors'
  import mongoose from "mongoose";
+ import {readdirSync} from 'fs';
  const morgan = require('morgan')
  require('dotenv').config()
 
@@ -18,6 +19,9 @@ mongoose.connect(process.env.MONGO_DB_URL,{
 app.use(express.json())
 app.use(cors())
 app.use(morgan("dev"))
+
+//route
+readdirSync("./routes").map(r =>app.use("/api", require(`./routes/${r}`)))
 
 app.get('/', (req,res)=>{
     res.send(`<h1>App is running</h1>`)
