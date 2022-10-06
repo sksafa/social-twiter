@@ -75,7 +75,7 @@ const register = () => {
                             </>) : 'Register'}
 
                             </button>
-                            <p className='m-3'> Are You Registered ?<Link href="./login">Go Login </Link></p>
+                            <p className='m-3'> Are You Registered ?<span className='text-success'><Link href="./login">Go Login </Link></span></p>
                         </div>
                     </form>
                 </div>
