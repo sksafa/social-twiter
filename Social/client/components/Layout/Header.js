@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { UserContext } from '../../context';
+import { useRouter } from 'next/router';
 
 const Header = () => {
+    const [currentTab, setCurrentTab] = useState("")
+    useEffect(() => {
+        process.browser && setCurrentTab(window.location.pathname)
+    }, [])
+
+    const router = useRouter()
+    const [state, setState] = useContext(UserContext);
+    const handleLogout = () => {
+        window.localStorage.removeItem("auth");
+        setState(null)
+        router.push('/login');
+    }
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -16,29 +30,38 @@ const Header = () => {
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link href="/">
-                                    <a className="nav-link active" aria-current="page" >Home</a>
+                                    <a className = {`nav-link ${currentTab === "/" && 'active'}`} aria-current="page" >Home</a>
                                 </Link>
                             </li>
 
                             <li className="nav-item">
                                 <Link href="/about">
-                                    <a className="nav-link">About</a>
+                                    <a className = {`nav-link ${currentTab === "/about" && 'active'}`}>About</a>
                                 </Link>
                             </li>
 
-                            <li className="nav-item">
-                                <Link href="/register">
-                                    <a className="nav-link">Register</a>
-                                </Link>
-                            </li>
+                            {state !== null ? <>
+                                <li className="nav-item">
+                                    <Link href="/user/dashboard">
+                                        <a className = {`nav-link ${currentTab === "/user/dashboard" && 'active'}`}>Dashboard</a>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" onClick={handleLogout}>Logout</a>
+                                </li>
+                            </> : <>
+                                <li className="nav-item">
+                                    <Link href="/register">
+                                        <a className = {`nav-link ${currentTab === "/register" && 'active'}`}>Register</a>
+                                    </Link>
+                                </li>
 
-                            <li className="nav-item">
-                                <Link href="/login">
-                                    <a className="nav-link">Login</a>
-                                </Link>
-                            </li>
-
-
+                                <li className="nav-item">
+                                    <Link href="/login">
+                                        <a className = {`nav-link ${currentTab === "/login" && 'active'}`}>Login</a>
+                                    </Link>
+                                </li>
+                            </>}
                         </ul>
 
                     </div>
