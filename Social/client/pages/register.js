@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '../components/Layout'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link';
+import { UserContext } from '../context';
 
 const register = () => {
     const [name, setName] = useState("")
@@ -14,6 +15,8 @@ const register = () => {
     const [answer, setAnswer] = useState("")
     const [loading, setLoading] = useState(false)
     const router = useRouter()
+
+    const [state, setState] = useContext(UserContext)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,7 +32,7 @@ const register = () => {
             toast.error(error.response.data)
         }
     }
-
+    if(state && state.token) router.push('/')
     return (
         <Layout>
             <div className='row d-flex justify-content-center align-items-center'>
@@ -75,7 +78,7 @@ const register = () => {
                             </>) : 'Register'}
 
                             </button>
-                            <p className='m-3'> Are You Registered ?<Link href="./login">Go Login </Link></p>
+                            <p className='m-3'> Are You Registered ?<span className='text-success'><Link href="./login">Go Login </Link></span></p>
                         </div>
                     </form>
                 </div>
