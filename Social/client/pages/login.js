@@ -14,18 +14,18 @@ const login = () => {
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const router = useRouter()
-    const [state, setState]  = useContext(UserContext);
+    const [state, setState] = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             setLoading(true)
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, {
+            const { data } = await axios.post(`/login`, {
                 email, password
             })
             setState({
-                user:data.user,
-                token:data.token,
+                user: data.user,
+                token: data.token,
             })
             window.localStorage.setItem("auth", JSON.stringify(data));
             setLoading(false)
@@ -37,8 +37,8 @@ const login = () => {
         }
     }
 
-    if(state && state.token) router.push('/')
-    
+    if (state && state.token) router.push('/')
+
     return (
         <Layout>
             <div className='row d-flex justify-content-center align-items-center'>
