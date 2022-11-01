@@ -26,27 +26,27 @@ const dashboard = () => {
   return (
     <Layout>
       <UserRoute>
-      <div className="row">
-          <div className="col-md-8">
-            <ToastContainer
-              position="top-center"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-            {/* <CreatePost
+          <div className="row">
+            <div className="col-md-8">
+              <ToastContainer
+                position="top-center"
+                autoClose={1500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+              {/* <CreatePost
               content={content}
               setContent={setContent}
               handlePostSubmit={handlePostSubmit}
             /> */}
+            </div>
+            <div className="col-md-4">sidebar</div>
           </div>
-          <div className="col-md-4">sidebar</div>
-        </div>
       </UserRoute>
     </Layout>
   )
