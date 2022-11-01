@@ -22,7 +22,7 @@ const register = () => {
         e.preventDefault();
         try {
             setLoading(true)
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
+            const { data } = await axios.post(`/register`, {
                 name, email, password, answer
             })
             setLoading(false)
@@ -38,7 +38,7 @@ const register = () => {
             <div className='row d-flex justify-content-center align-items-center'>
                 <div className='col-md-8'>
                     <h1 className='pt-4 mb-3'>Register Now </h1>
-                    <form >
+                    <form>
                         <ToastContainer
                             position="top-right"
                             autoClose={5000}
