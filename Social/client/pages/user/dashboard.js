@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useEffect } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import Layout from '../../components/Layout'
 import UserRoute from '../../components/routes/userRoute'
 import { UserContext } from '../../context';
 import "react-toastify/dist/ReactToastify.css";
 import CreatePost from '../../components/Post/CreatePost';
+import PostList from '../../components/Post/PostList';
 
 const dashboard = () => {
   const [content, setContent] = useState("");
+  const [posts, setPosts] = useState([]);
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
   const [state] = useContext(UserContext);
@@ -47,6 +49,23 @@ const dashboard = () => {
       console.log(error);
     }
   };
+
+  //useEffect for posts
+  useEffect(() => {
+    if (state && state.token) {
+      fetchUserPosts();
+    }
+  }, [state && state.token]);
+  //fetchUserPosts
+  const fetchUserPosts = async () => {
+    try {
+      const { data } = await axios.get("/user-post");
+      console.log(data);
+      setPosts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Layout>
       <UserRoute>
@@ -71,6 +90,8 @@ const dashboard = () => {
               uploading={uploading}
               image={image}
             />
+            <br />
+            <PostList posts={posts} />
           </div>
           <div className="col-md-4">sidebar</div>
         </div>

@@ -9,7 +9,7 @@ export default function Home() {
     <Layout title="Home- Social Media">
       <h2 className="text-success">My app</h2>
       <h1>{JSON.stringify(state)}</h1>
-      <h1>{state.user.name}</h1>
+      {/* <h1>{state.user.name}</h1> */}
     </Layout>
 
   )
