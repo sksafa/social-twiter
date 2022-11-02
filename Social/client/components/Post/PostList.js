@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import parse from 'html-react-parser';
+import PostImage from "./PostImage";
 // import renderHTML from "react-render-html";
+import { BsSuitHeart, BsTrash } from 'react-icons/bs'
+import { GoComment } from 'react-icons/go'
+import { FiEdit } from 'react-icons/fi'
+import { useRouter } from "next/router";
+import { UserContext } from "../../context";
 const PostList = ({ posts }) => {
   const defaultImage = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+  const router = useRouter();
+  const [state] = useContext(UserContext)
   return (
     <>
       {posts &&
@@ -25,22 +33,25 @@ const PostList = ({ posts }) => {
                 </div>
               </div>
               <div className="card-body">
-              {parse(`<div> ${post.content}</div>`)}
-               
+                {parse(`<div> ${post.content}</div>`)}
+                <PostImage url={post.image && post.image.url} />
               </div>
               <div className="card-footer">
-                <div>
-                  {post.image ? (
-                    <img
-                      src={post.image && post.image.url}
-                      alt={post.postedBy.name}
-                      height={300}
-                    />
-                  ) : (
-                    ""
+                <div className="d-flex justify-content-between">
+                  <div className="d-flex">
+                    <p><BsSuitHeart cursor={'pointer'} color="red" size={25} /> 5 Likes </p>
+                    &nbsp; &nbsp;
+                    <p><GoComment size={25} cursor={'pointer'} /> 3 Comments</p>
+                  </div>
+                  {state && state.user && state.user._id === post.postedBy._id && (
+                    <div className="d-flex">
+                      <BsTrash size={20} cursor={'pointer'} />
+                      &nbsp; &nbsp;
+                      <FiEdit size={20} cursor={'pointer'} onClick={() => router.push(`/user/post/${post._id}`)} />
+                    </div>
                   )}
+
                 </div>
-                <p>Like Comment</p>
               </div>
             </div>
           </div>
