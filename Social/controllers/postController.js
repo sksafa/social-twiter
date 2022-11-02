@@ -9,6 +9,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRECT
 })
 
+//create post
 export const createPostController = async (req, res) => {
   //   console.log(req.body);
   const { content,image } = req.body;
@@ -26,6 +27,7 @@ export const createPostController = async (req, res) => {
   }
 };
 
+//image upload to cloudinary
 export const imageUploadController = async(req, res)=>{
 
   try {
@@ -40,3 +42,17 @@ export const imageUploadController = async(req, res)=>{
     console.log(error)
   }
 }
+
+//get post 
+export const userPostsController = async (req, res) => {
+  try {
+    const posts = await postModel
+      .find({ postedBy: req.user._id })
+      .populate("postedBy", "_id name image")
+      .sort({ createdAt: -1 })
+      .limit(10);
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+  }
+};
