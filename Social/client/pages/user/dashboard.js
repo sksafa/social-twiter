@@ -68,35 +68,35 @@ const dashboard = () => {
   };
   return (
     <Layout>
-      <UserRoute>
-        <div className="row">
-          <div className="col-md-8">
-            <ToastContainer
-              position="top-center"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-            <CreatePost
-              content={content}
-              setContent={setContent}
-              handlePostSubmit={handlePostSubmit}
-              handleImage={handleImage}
-              uploading={uploading}
-              image={image}
-            />
-            <br />
-            <PostList posts={posts} />
-          </div>
-          <div className="col-md-4">sidebar</div>
+    <UserRoute>
+      <div className="row">
+        <div className="col-md-8">
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <CreatePost
+            content={content}
+            setContent={setContent}
+            handlePostSubmit={handlePostSubmit}
+            handleImage={handleImage}
+            uploading={uploading}
+            image={image}
+          />
+          <br />
+          <PostList posts={posts} />
         </div>
-      </UserRoute>
-    </Layout>
+        <div className="col-md-4">sidebar</div>
+      </div>
+    </UserRoute>
+  </Layout>
   )
 }
 
