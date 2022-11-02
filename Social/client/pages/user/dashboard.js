@@ -16,20 +16,6 @@ const dashboard = () => {
   const [uploading, setUploading] = useState(false);
   const [state] = useContext(UserContext);
   const router = useRouter();
-  //post handler
-  const handlePostSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post("/createpost", { content, image });
-      // console.log("content", data);
-      toast.success("Post Created!");
-      setImage({});
-      setContent("");
-    } catch (error) {
-      toast.error(error);
-      console.log(error);
-    }
-  };
   //handle image upload
   const handleImage = async (e) => {
     const file = e.target.files[0];
@@ -66,6 +52,22 @@ const dashboard = () => {
       console.log(error);
     }
   };
+
+    //post handler
+    const handlePostSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const { data } = await axios.post("/createpost", { content, image });
+        fetchUserPosts();
+        // console.log("content", data);
+        toast.success("Post Created!");
+        setImage({});
+        setContent("");
+      } catch (error) {
+        toast.error(error);
+        console.log(error);
+      }
+    };
   return (
     <Layout>
     <UserRoute>
