@@ -40,3 +40,17 @@ export const imageUploadController = async(req, res)=>{
     console.log(error)
   }
 }
+
+// /userPostsController
+export const userPostsController = async (req, res) => {
+  try {
+    const posts = await postModel
+      .find({ postedBy: req.user._id })
+      .populate("postedBy", "_id name image")
+      .sort({ createdAt: -1 })
+      .limit(10);
+    res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+  }
+};
