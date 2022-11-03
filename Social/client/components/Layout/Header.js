@@ -18,56 +18,136 @@ const Header = () => {
     }
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container">
-                    <Link href="/">
-                        <a className="navbar-brand" >Navbar</a>
-                    </Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link href="/">
-                                    <a className = {`nav-link ${currentTab === "/" && 'active'}`} aria-current="page" >Home</a>
-                                </Link>
-                            </li>
-
-                            <li className="nav-item">
-                                <Link href="/about">
-                                    <a className = {`nav-link ${currentTab === "/about" && 'active'}`}>About</a>
-                                </Link>
-                            </li>
-
-                            {state !== null ? <>
-                                <li className="nav-item">
-                                    <Link href="/user/dashboard">
-                                        <a className = {`nav-link ${currentTab === "/user/dashboard" && 'active'}`}>Dashboard</a>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" onClick={handleLogout}>Logout</a>
-                                </li>
-                            </> : <>
-                                <li className="nav-item">
-                                    <Link href="/register">
-                                        <a className = {`nav-link ${currentTab === "/register" && 'active'}`}>Register</a>
-                                    </Link>
-                                </li>
-
-                                <li className="nav-item">
-                                    <Link href="/login">
-                                        <a className = {`nav-link ${currentTab === "/login" && 'active'}`}>Login</a>
-                                    </Link>
-                                </li>
-                            </>}
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div className="container">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo03"
+              aria-controls="navbarTogglerDemo03"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon" />
+            </button>
+            <Link href="/">
+              <a className="navbar-brand">TECHINFO YT</a>
+            </Link>
+  
+            <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <Link href="/">
+                    <a
+                      className={`nav-link ${currentTab === "/" && "active"}`}
+                      aria-current="page"
+                    >
+                      Home
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/about">
+                    <a
+                      className={`nav-link ${
+                        currentTab === "/about" && "active"
+                      }`}
+                      aria-current="page"
+                    >
+                      About
+                    </a>
+                  </Link>
+                </li>
+                {state !== null ? (
+                  <>
+                    <div>
+                      <li className="nav-item dropdown">
+                        <a
+                          className="nav-link dropdown-toggle"
+                          href="#"
+                          id="navbarDropdown"
+                          role="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          {state && state.user && state.user.name}
+                        </a>
+                        <ul
+                          className="dropdown-menu"
+                          aria-labelledby="navbarDropdown"
+                        >
+                          <li>
+                            <Link href="/user/dashboard">
+                              <a
+                                className={`dropdown-item ${
+                                  currentTab === "/user/dashborad" && "active"
+                                }`}
+                                aria-current="page"
+                              >
+                                Dashboard
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="/user/profile/update">
+                              <a
+                                className={`dropdown-item ${
+                                  currentTab === "/user/profile/update" &&
+                                  "active"
+                                }`}
+                                aria-current="page"
+                              >
+                                Profile
+                              </a>
+                            </Link>
+                          </li>
                         </ul>
-
+                      </li>
                     </div>
-                </div>
-            </nav>
-        </div>
+                    <li className="nav-item">
+                      <a
+                        className="nav-link "
+                        aria-current="page"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link href="/register">
+                        <a
+                          className={`nav-link ${
+                            currentTab === "/register" && "active"
+                          }`}
+                          aria-current="page"
+                        >
+                          Register
+                        </a>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/login">
+                        <a
+                          className={`nav-link ${
+                            currentTab === "/login" && "active"
+                          }`}
+                          aria-current="page"
+                        >
+                          Login
+                        </a>
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
     )
 }
 
