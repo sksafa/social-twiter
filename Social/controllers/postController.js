@@ -78,3 +78,15 @@ export const updatePostController = async (req, res) => {
 }
 
 
+
+export const deletePostController = async (req, res) => {
+  try {
+    const post = await postModel.findByIdAndDelete(req.params._id);
+    if(post.image && post.image.public_id){
+      const image = await cloudinary.uploader.destroy( post.image.public_id)
+    }
+    res.status(201).json({ok:true});
+  } catch (error) {
+    console.log(error)
+  }
+}

@@ -1,6 +1,6 @@
 
 import express from "express";
-import { createPostController,imageUploadController, userPostsController,userPostEditController,updatePostController } from "../controllers/postController";
+import { createPostController,imageUploadController, userPostsController,userPostEditController,updatePostController,deletePostController } from "../controllers/postController";
 import { editDeletePost, requireSignIn } from "../middleware";
 import expressFormidable from 'express-formidable';
 //router object
@@ -12,4 +12,5 @@ router.post("/upload-image", requireSignIn, expressFormidable({maxFieldsSize:5*1
 router.get("/user-post", requireSignIn, userPostsController);
 router.get("/user-post/:_id", requireSignIn, userPostEditController);
 router.put("/update-post/:_id", requireSignIn,editDeletePost, updatePostController);
+router.delete("/delete-post/:_id", requireSignIn,editDeletePost, deletePostController);
 module.exports = router;
