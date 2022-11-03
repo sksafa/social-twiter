@@ -8,7 +8,7 @@ import { GoComment } from 'react-icons/go'
 import { FiEdit } from 'react-icons/fi'
 import { useRouter } from "next/router";
 import { UserContext } from "../../context";
-const PostList = ({ posts }) => {
+const PostList = ({ posts, deleteHandler }) => {
   const defaultImage = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
   const router = useRouter();
   const [state] = useContext(UserContext)
@@ -45,7 +45,7 @@ const PostList = ({ posts }) => {
                   </div>
                   {state && state.user && state.user._id === post.postedBy._id && (
                     <div className="d-flex">
-                      <BsTrash size={20} cursor={'pointer'} />
+                      <BsTrash size={20} cursor={'pointer'} onClick={() => deleteHandler(post)} />
                       &nbsp; &nbsp;
                       <FiEdit size={20} cursor={'pointer'} onClick={() => router.push(`/user/post/${post._id}`)} />
                     </div>

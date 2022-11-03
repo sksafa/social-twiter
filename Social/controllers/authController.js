@@ -1,6 +1,7 @@
 import userModel from "../models/userModel"
 import { hashPassword, comparePassword } from "../utiles/helper"
 import jwt from 'jsonwebtoken'
+import { nanoid } from "nanoid";
 
 
 //registration controller
@@ -23,7 +24,13 @@ export const registerController = async (req, res) => {
 
     //hash password
     const hashedPassword = await hashPassword(password)
-    const user = new userModel({ name, email, password: hashedPassword, answer })
+    const user = new userModel({
+        name,
+        email,
+        password: hashedPassword,
+        answer,
+        username: nanoid(6),
+      });
     try {
         await user.save()
         res.status(200).send('User Registered Successfully')
@@ -97,5 +104,51 @@ export const forgotPasswordController = async (req, res) => {
     } catch (error) {
       console.log(error);
       return res.status(400).send("Something Went Wrong");
+    }
+  };
+
+
+  // update profile
+export const updateProfileController = async (req, res) => {
+    // console.log(req.body);
+    try {
+      const data = {};
+      if (req.body.username) {
+        data.username = req.body.username;
+      }
+      if (req.body.image) {
+        data.image = req.body.image;
+      }
+      if (req.body.about) {
+        data.about = req.body.about;
+      }
+      if (req.body.name) {
+        data.name = req.body.name;
+      }
+      if (req.body.password) {
+        if (req.body.password < 6) {
+          return res.status(502).json({
+            error: "Password Required and should be longer than 6 character",
+          });
+        } else {
+          data.password = await hashPassword(req.body.password);
+        }
+      }
+      if (req.body.answer) {
+        data.answer = req.body.answer;
+      }
+      let user = await userModel.findByIdAndUpdate(req.user._id, data, {
+        new: true,
+      });
+      user.password = null;
+      user.answer = null;
+      res.status(200).json(user);
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({
+          error: "Duplicate UserName Error",
+        });
+      }
+      console.log(err);
     }
   };
