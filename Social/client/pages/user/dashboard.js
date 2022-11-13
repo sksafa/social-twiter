@@ -12,6 +12,7 @@ import PostList from '../../components/Post/PostList';
 const dashboard = () => {
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
+  const [people, setPeople] = useState([]);
   const [image, setImage] = useState({});
   const [uploading, setUploading] = useState(false);
   const [state] = useContext(UserContext);
@@ -35,13 +36,29 @@ const dashboard = () => {
       console.log(error);
     }
   };
+  
+
 
   //useEffect for posts
   useEffect(() => {
     if (state && state.token) {
       fetchUserPosts();
+      findPeople();
     }
   }, [state && state.token]);
+
+
+  //suggest people
+  const findPeople = async()=>{
+    try {
+      const {data} = await axios.get("/find-people")
+      console.log("asshdash",data)
+      setPeople(data);
+    } catch (error) {
+     toast.error('Something is wrong')
+    }
+}
+
   //fetchUserPosts
   const fetchUserPosts = async () => {
     try {
@@ -107,7 +124,9 @@ const dashboard = () => {
           <br />
           <PostList posts={posts}  deleteHandler={deleteHandler} />
         </div>
-        <div className="col-md-4">sidebar</div>
+        <div className="col-md-4">
+          <div>{JSON.stringify(people)}</div>
+        </div>
       </div>
     </UserRoute>
   </Layout>
