@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerController,loginController,updateProfileController,currentUserController,forgotPasswordController} from '../controllers/authController';
+import { registerController,loginController,updateProfileController,currentUserController,forgotPasswordController, findPeopleController} from '../controllers/authController';
 
 import {requireSignIn} from '../middleware'
 //route object
@@ -11,5 +11,6 @@ router.post("/login", loginController);
 router.get("/currentUser", requireSignIn, currentUserController);
 router.post("/forgot-password", forgotPasswordController);
 router.put("/profile-update", requireSignIn, updateProfileController);
+router.put("/find-people", requireSignIn, findPeopleController);
 
 module.exports = router;
