@@ -8,6 +8,7 @@ import { UserContext } from '../../context';
 import "react-toastify/dist/ReactToastify.css";
 import CreatePost from '../../components/Post/CreatePost';
 import PostList from '../../components/Post/PostList';
+import PeopleCom from '../../components/PeopleCom';
 
 const dashboard = () => {
   const [content, setContent] = useState("");
@@ -125,7 +126,8 @@ const dashboard = () => {
           <PostList posts={posts}  deleteHandler={deleteHandler} />
         </div>
         <div className="col-md-4">
-          <div>{JSON.stringify(people)}</div>
+          {/* <div>{JSON.stringify(people , null, 6)}</div> */}
+          <PeopleCom people={people}/>
         </div>
       </div>
     </UserRoute>
