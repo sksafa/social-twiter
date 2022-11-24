@@ -156,7 +156,8 @@ export const updateProfileController = async (req, res) => {
 
    export const findPeopleController = async(req, res)=>{
     try {
-      const user = await userModel.findById(req.user_id)
+      let following =''
+      const user = await userModel.findById(req.user_id);
       //following user
       // let following  = user.following
       // following.push(user._id)

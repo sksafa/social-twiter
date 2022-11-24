@@ -9,6 +9,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRECT
 })
 
+//create post
 export const createPostController = async (req, res) => {
   //   console.log(req.body);
   const { content, image } = req.body;
