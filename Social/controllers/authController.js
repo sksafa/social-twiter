@@ -159,12 +159,12 @@ export const updateProfileController = async (req, res) => {
       let following =''
       const user = await userModel.findById(req.user_id);
       //following user
-       following  = user.following;
-      console.log("folo", following);
-      following.push(user._id);
-      const people = await userModel.find({ _id: { $nin: following } }).limit(6);
-      console.log("first", people);
-      res.json(people);
+      // let following  = user.following
+      // following.push(user._id)
+      // console.log("first", following);
+      // const people = await userModel.find({ _id: { $nin: following}}).limit(6)
+      const people = await userModel.find().select("-password -answer").limit(10)
+      res.json(people)
     } catch (error) {
       console.log(error)
     }

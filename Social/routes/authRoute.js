@@ -11,6 +11,6 @@ router.post("/login", loginController);
 router.get("/currentUser", requireSignIn, currentUserController);
 router.post("/forgot-password", forgotPasswordController);
 router.put("/profile-update", requireSignIn, updateProfileController);
-router.get("/find-people",requireSignIn, findPeopleController);
+router.get("/find-people", requireSignIn, findPeopleController);
 
 module.exports = router;
