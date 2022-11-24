@@ -125,7 +125,7 @@ const dashboard = () => {
           <PostList posts={posts}  deleteHandler={deleteHandler} />
         </div>
         <div className="col-md-4">
-          <div>{JSON.stringify(people)}</div>
+          <div>{JSON.stringify(people, null, 4)}</div>
         </div>
       </div>
     </UserRoute>

@@ -156,12 +156,15 @@ export const updateProfileController = async (req, res) => {
 
    export const findPeopleController = async(req, res)=>{
     try {
-      const user = await userModel.findById(req.user_id)
+      let following =''
+      const user = await userModel.findById(req.user_id);
       //following user
-      let following  = user.following
-      following.push(user._id)
-      const people = await userModel.find({_id:{$nin:following}}).limit(6)
-      res.json(people)
+       following  = user.following;
+      console.log("folo", following);
+      following.push(user._id);
+      const people = await userModel.find({ _id: { $nin: following } }).limit(6);
+      console.log("first", people);
+      res.json(people);
     } catch (error) {
       console.log(error)
     }
