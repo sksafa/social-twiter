@@ -1,7 +1,16 @@
 import express from 'express'
-import { registerController,loginController,updateProfileController,currentUserController,forgotPasswordController, findPeopleController} from '../controllers/authController';
+import {
+    registerController,
+    followUser,
+    unFollowUser,
+    loginController,
+    updateProfileController,
+    currentUserController,
+    forgotPasswordController,
+    findPeopleController
+} from '../controllers/authController';
 
-import {requireSignIn} from '../middleware'
+import { requireSignIn } from '../middleware'
 //route object
 const router = express.Router();
 
@@ -12,5 +21,7 @@ router.get("/currentUser", requireSignIn, currentUserController);
 router.post("/forgot-password", forgotPasswordController);
 router.put("/profile-update", requireSignIn, updateProfileController);
 router.get("/find-people", requireSignIn, findPeopleController);
+router.put("/follow/:id",requireSignIn, followUser);
+router.put("/unfollow/:id", unFollowUser);
 
 module.exports = router;
