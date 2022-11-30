@@ -170,6 +170,9 @@ export const updateProfileController = async (req, res) => {
 
    // follower 
   export const followUser = async (req, res) =>{
+    console.log("cuser",req.body.userId)
+    console.log("user", req.params.id)
+
     if (req.body.userId !== req.params.id) {
       try {
         const user = await userModel.findById(req.params.id);
@@ -192,6 +195,8 @@ export const updateProfileController = async (req, res) => {
 // unFollowing
 
 export const unFollowUser =async (req, res) =>{
+  console.log("cuser",req.body.userId)
+  console.log("user", req.params.id)
   if (req.body.userId !== req.params.id) {
     try {
       const user = await userModel.findById(req.params.id);

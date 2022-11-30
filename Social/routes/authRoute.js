@@ -21,7 +21,7 @@ router.get("/currentUser", requireSignIn, currentUserController);
 router.post("/forgot-password", forgotPasswordController);
 router.put("/profile-update", requireSignIn, updateProfileController);
 router.get("/find-people", requireSignIn, findPeopleController);
-router.put("/follow/:id",requireSignIn, followUser);
+router.put("/follow/:id", followUser);
 router.put("/unfollow/:id", unFollowUser);
 
 module.exports = router;

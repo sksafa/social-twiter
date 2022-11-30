@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useContext, useState,useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import Layout from '../../components/Layout'
 import UserRoute from '../../components/routes/userRoute'
@@ -37,8 +37,6 @@ const dashboard = () => {
       console.log(error);
     }
   };
-  
-
 
   //useEffect for posts
   useEffect(() => {
@@ -50,15 +48,15 @@ const dashboard = () => {
 
 
   //suggest people
-  const findPeople = async()=>{
+  const findPeople = async () => {
     try {
-      const {data} = await axios.get("/find-people")
-      console.log("asshdash",data)
+      const { data } = await axios.get("/find-people")
+      console.log("asshdash", data)
       setPeople(data);
     } catch (error) {
-     toast.error('Something is wrong')
+      toast.error('Something is wrong')
     }
-}
+  }
 
   //fetchUserPosts
   const fetchUserPosts = async () => {
@@ -71,67 +69,81 @@ const dashboard = () => {
     }
   };
 
-    //post handler
-    const handlePostSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const { data } = await axios.post("/createpost", { content, image });
-        fetchUserPosts();
-        // console.log("content", data);
-        toast.success("Post Created!");
-        setImage({});
-        setContent("");
-      } catch (error) {
-        toast.error(error);
-        console.log(error);
-      }
-    };
+  //post handler
+  const handlePostSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/createpost", { content, image });
+      fetchUserPosts();
+      // console.log("content", data);
+      toast.success("Post Created!");
+      setImage({});
+      setContent("");
+    } catch (error) {
+      toast.error(error);
+      console.log(error);
+    }
+  };
 
-  const deleteHandler = async (post)=>{
+  const deleteHandler = async (post) => {
     try {
       const answer = window.confirm('Are you sure');
-      if(!answer) return
-      const {data} = await axios.delete(`/delete-post/${post._id}`);
+      if (!answer) return
+      const { data } = await axios.delete(`/delete-post/${post._id}`);
       toast.success('Post Deleted');
       fetchUserPosts();
     } catch (error) {
       console.log(error)
     }
   }
+  
+  const handleFollowed = async (id, name)=>{
+    try {
+        const {data} = await axios.put(`/follow/${id}`,{userId:state.user._id} )
+        toast.success(`You Followed ${name}`);
+        findPeople()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
   return (
     <Layout>
-    <UserRoute>
-      <div className="row">
-        <div className="col-md-8">
-          <ToastContainer
-            position="top-center"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <CreatePost
-            content={content}
-            setContent={setContent}
-            handlePostSubmit={handlePostSubmit}
-            handleImage={handleImage}
-            uploading={uploading}
-            image={image}
-          />
-          <br />
-          <PostList posts={posts}  deleteHandler={deleteHandler} />
+      <UserRoute>
+        <div className="row">
+          <div className="col-md-8">
+            <ToastContainer
+              position="top-center"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <CreatePost
+              content={content}
+              setContent={setContent}
+              handlePostSubmit={handlePostSubmit}
+              handleImage={handleImage}
+              uploading={uploading}
+              image={image}
+            />
+            <br />
+            <PostList posts={posts} deleteHandler={deleteHandler} />
+          </div>
+          <div className="col-md-4">
+            {/* <div>{JSON.stringify(people , null, 6)}</div> */}
+            <PeopleCom
+              people={people}
+              handleFollowed={handleFollowed}
+            />
+          </div>
         </div>
-        <div className="col-md-4">
-          {/* <div>{JSON.stringify(people , null, 6)}</div> */}
-          <PeopleCom people={people}/>
-        </div>
-      </div>
-    </UserRoute>
-  </Layout>
+      </UserRoute>
+    </Layout>
   )
 }
 

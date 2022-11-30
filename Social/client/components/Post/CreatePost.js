@@ -47,7 +47,6 @@ const CreatePost = ({ content, setContent, handlePostSubmit,handleImage, image, 
               Post
             </button>
           </div>
-          <h2>Hi , Iam from git . i am safa </h2>
         </div>
       </>
     );

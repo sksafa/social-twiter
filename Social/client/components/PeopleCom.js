@@ -1,8 +1,9 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../context';
 
-const PeopleCom = ({ people }) => {
+const PeopleCom = ({ people, handleFollowed }) => {
     const defaultImage = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-    console.log("people", people)
     return (
         <div className='mt-4'>
             {people.map(user => 
@@ -15,7 +16,7 @@ const PeopleCom = ({ people }) => {
                             width={50}
                             style={{ borderRadius: "50%" }} />
                         <h6 className='mt-2'>{user.name}</h6>
-                        <button className='btn btn-primary'>Follow</button>
+                        <button className='btn btn-primary' onClick={()=>handleFollowed(user._id, user.name)}>Follow</button>
                     </div>
                 </div>
             )}
