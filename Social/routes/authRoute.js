@@ -7,7 +7,8 @@ import {
     updateProfileController,
     currentUserController,
     forgotPasswordController,
-    findPeopleController
+    findPeopleController,
+    getSingleUserController
 } from '../controllers/authController';
 
 import { requireSignIn } from '../middleware'
@@ -16,6 +17,7 @@ const router = express.Router();
 
 //route 
 router.post("/register", registerController);
+router.get("/user/:id",requireSignIn, getSingleUserController);
 router.post("/login", loginController);
 router.get("/currentUser", requireSignIn, currentUserController);
 router.post("/forgot-password", forgotPasswordController);

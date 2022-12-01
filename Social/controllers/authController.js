@@ -70,13 +70,26 @@ export const loginController = async (req, res) => {
 export const currentUserController = async (req, res) => {
     console.log(req.user);
     try {
-        const user = await userModel.findById(req.user._id);
+        const user = await userModel.findById(req.user._id).populate("following", " _id, name");
         res.status(200).json({ok:true});
         // res.json(user)
     } catch (error) {
         res.status(400).send(error)
         console.log(error)
     }
+
+}
+
+//test
+export const getSingleUserController = async (req, res) => {
+  try {
+      const user = await userModel.findById(req.params.id).populate("following", " _id, name");
+      res.status(200).json(user);
+      // res.json(user)
+  } catch (error) {
+      res.status(400).send(error)
+      console.log(error)
+  }
 
 }
 

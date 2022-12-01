@@ -90,10 +90,10 @@ const Header = () => {
                             </Link>
                           </li>
                           <li>
-                            <Link href="/user/profile/update">
+                            <Link href="/user/profile/Profile">
                               <a
                                 className={`dropdown-item ${
-                                  currentTab === "/user/profile/update" &&
+                                  currentTab === "/user/profile/Profile" &&
                                   "active"
                                 }`}
                                 aria-current="page"
