@@ -32,7 +32,7 @@ const Header = () => {
               <span className="navbar-toggler-icon" />
             </button>
             <Link href="/">
-              <a className="navbar-brand">TECHINFO YT</a>
+              <a className="navbar-brand">Social Platform</a>
             </Link>
   
             <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
