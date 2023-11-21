@@ -78,7 +78,7 @@ export const updatePostController = async (req, res) => {
 }
 
 
-
+//delete controller 
 export const deletePostController = async (req, res) => {
   try {
     const post = await postModel.findByIdAndDelete(req.params._id);
