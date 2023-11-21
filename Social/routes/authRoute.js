@@ -15,7 +15,7 @@ import { requireSignIn } from '../middleware'
 //route object
 const router = express.Router();
 
-//route 
+//auth route 
 router.post("/register", registerController);
 router.get("/user/:id",requireSignIn, getSingleUserController);
 router.post("/login", loginController);
