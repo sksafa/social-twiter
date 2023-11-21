@@ -166,7 +166,7 @@ export const updateProfileController = async (req, res) => {
     }
   };
 
-
+//find people controller 
    export const findPeopleController = async(req, res)=>{
     try {
       const user = await userModel.findById(req.user._id)
