@@ -8,8 +8,6 @@ export const requireSignIn = expressJwt({
   algorithms: ["HS256"],
 });
 
-
-
 // editDeletePost
 export const editDeletePost = async (req, res, next)=>{
   try {
