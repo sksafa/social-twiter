@@ -26,6 +26,7 @@ export const createPostController = async (req, res) => {
   }
 };
 
+//image uplloader
 export const imageUploadController = async (req, res) => {
 
   try {
@@ -76,7 +77,6 @@ export const updatePostController = async (req, res) => {
     console.log(error)
   }
 }
-
 
 //delete controller 
 export const deletePostController = async (req, res) => {
