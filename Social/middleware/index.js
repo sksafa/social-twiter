@@ -2,7 +2,7 @@
 import expressJwt from "express-jwt";
 import postModel from "../models/postModel";
 
-
+// require sign in
 export const requireSignIn = expressJwt({
   secret:process.env.JWT_SECRET,
   algorithms: ["HS256"],
