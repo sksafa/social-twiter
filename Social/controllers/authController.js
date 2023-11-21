@@ -3,7 +3,6 @@ import { hashPassword, comparePassword } from "../utiles/helper"
 import jwt from 'jsonwebtoken'
 import { nanoid } from "nanoid";
 
-
 //registration controller
 export const registerController = async (req, res) => {
     const { name, email, password, answer } = req.body
@@ -79,7 +78,6 @@ export const currentUserController = async (req, res) => {
     }
 
 }
-
 //test
 export const getSingleUserController = async (req, res) => {
   try {
@@ -121,7 +119,7 @@ export const forgotPasswordController = async (req, res) => {
   };
 
 
-  // update profile
+// update profile
 export const updateProfileController = async (req, res) => {
     // console.log(req.body);
     try {
@@ -206,7 +204,6 @@ export const updateProfileController = async (req, res) => {
   }
  
 // unFollowing
-
 export const unFollowUser =async (req, res) =>{
   console.log("cuser",req.body.userId)
   console.log("user", req.params.id)
