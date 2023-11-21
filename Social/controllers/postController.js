@@ -1,7 +1,6 @@
 
 import postModel from "../models/postModel";
 import cloudinary from 'cloudinary'
-
 //configure
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
