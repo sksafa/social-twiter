@@ -4,7 +4,7 @@ import { BsCamera } from 'react-icons/bs';
 //ssr false
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
-const CreatePost = ({ content, setContent, handlePostSubmit,handleImage, image, uploading }) => {
+const CreatePost = ({ content, setContent,handlePostSubmit,handleImage,image, uploading }) => {
     return (
         <>
         <div className="card mt-4">
