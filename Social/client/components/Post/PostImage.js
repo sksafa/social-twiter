@@ -9,9 +9,7 @@ const PostImage = ({ url }) => {
                 height={500}
                 className="w-100 m-1"
             />)}
-
         </div>
     )
 }
-
 export default PostImage
