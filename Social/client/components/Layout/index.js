@@ -14,11 +14,9 @@ const Layout = ({ children, title }) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
                 <title>{title}</title>
             </Head>
-
             <Header></Header>
             <main className='container' style={{minHeight:'90vh'}}>{children}</main>
             <Footer></Footer>
-
         </>
     )
 }
